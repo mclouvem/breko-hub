@@ -5,6 +5,7 @@ import { after, flow } from 'lodash'
 import { makeContent } from 'app/utils/makeContent'
 import { history } from 'app/state/history'
 import { store } from 'app/state/store'
+import { routerMiddleware } from 'app/state/middleware'
 import makeRoutes from 'app/makeRoutes'
 import DevTools from 'app/components/containers/DevTools'
 import debug from 'debug'
@@ -19,7 +20,7 @@ const log = {
 }
 
 log.env(`Running in [${process.env.NODE_ENV}] environment`)
-
+routerMiddleware.syncHistoryToStore(store)
 inClientViaSocketIO(socket, store.dispatch)
 socket.on('connect', () => {
   log.sock('Client connected to socket')

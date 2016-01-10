@@ -14,10 +14,11 @@ const log = {
 export const middleware = [
   ...defaultMiddleware,
 ]
+export const routerMiddleware = syncHistory(history)
 
 if (isBrowser()) {
   middleware.push(
-    syncHistory(history),
+    routerMiddleware,
     outClientViaSocketIO(socket),
     createLogger({
       predicate: () => process.env.NODE_ENV === 'development',
