@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import { isBrowser } from 'app/utils/predicates'
 import { socket } from 'app/state/socket'
 import { outClientViaSocketIO } from 'redux-via-socket.io'
-import { syncHistory } from 'redux-simple-router'
+import { syncHistory } from 'react-router-redux'
 import { history } from 'app/state/history'
 import debug from 'debug'
 
