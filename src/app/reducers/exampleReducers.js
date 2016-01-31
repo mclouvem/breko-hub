@@ -7,4 +7,4 @@ export const exampleReducers = handleActions({
     example: action.payload.example,
   }),
 
-}, { example: null })
+}, { example: 'Jari' })

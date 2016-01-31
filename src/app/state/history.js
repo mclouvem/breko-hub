@@ -7,4 +7,3 @@ export const history =
   isBrowser()
     ? useQueries(createBrowserHistory)({ queryKey: false })
     : useQueries(createMemoryHistory)()
-

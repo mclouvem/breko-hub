@@ -2,9 +2,13 @@ import React from 'react'
 import DocumentMeta from 'react-document-meta'
 import debug from 'debug'
 import HeadNavigation from 'app/components/containers/HeadNavigation'
+import RouterHandler from 'app/utils/RouterHandler.react'
 import img from 'assets/avatar.jpeg'
 import style from './App.module.scss'
 import './App.css'
+
+import { connect } from 'react-redux'
+import mapStateToProps from '../utils/mapStateToProps'
 
 const log = {
   app: debug('App.es'),
@@ -21,6 +25,7 @@ const metaData = {
   },
 }
 
+@connect(mapStateToProps, null)
 class App extends React.Component {
 
   render() {
@@ -31,7 +36,7 @@ class App extends React.Component {
         <HeadNavigation />
         <img src={img} alt='me' width='70' />
         <h1>The Apple</h1>
-        Page: {this.props.children}
+        Page: <RouterHandler { ...this.props } />
       </main>
     )
   }
