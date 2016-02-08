@@ -18,10 +18,12 @@ export const defaultMiddleware = [
 export const middleware = [
   ...defaultMiddleware,
 ]
+// unused export, listenForReplays is currently buggy...
+export const routerReduxMiddleware = syncHistory(history)
 
 if (isBrowser()) {
   middleware.push(
-    syncHistory(history),
+    routerReduxMiddleware,
     outClientViaSocketIO(socket),
     createLogger({
       predicate: () => process.env.NODE_ENV === 'development',
