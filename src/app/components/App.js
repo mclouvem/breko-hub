@@ -1,6 +1,4 @@
-import React from 'react'
 import DocumentMeta from 'react-document-meta'
-import debug from 'debug'
 import HeadNavigation from 'app/components/containers/HeadNavigation'
 import RouterHandler from 'app/utils/RouterHandler.react'
 import img from 'assets/avatar.jpeg'
@@ -27,7 +25,6 @@ const metaData = {
 
 @connect(mapStateToProps, null)
 class App extends React.Component {
-
   render() {
     log.app('render')
     return (

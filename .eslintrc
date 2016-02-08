@@ -19,6 +19,10 @@
   "globals": {
     "expect": true,
     "global": true,
-    "window": true
+    "window": true,
+    "debug": true,
+    "React": true,
+    "PropTypes": true,
+    "_": true,
   }
 }

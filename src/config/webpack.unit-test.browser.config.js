@@ -24,6 +24,7 @@ export default {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.IgnorePlugin(/ReactContext/), // skin-deep
     isomorphicPlugin,
     ...webpackConfig.plugins,
     new HtmlWebpackPlugin(),
@@ -61,7 +62,13 @@ export default {
         'plugins': [
           'add-module-exports',
           'lodash',
-          'react-require',
+          [ 'provide-modules', {
+            'debug': 'debug',
+            'react': {
+              'default': 'React',
+              'destructured': [ 'PropTypes' ],
+            },
+          } ],
           'babel-root-import',
           'transform-decorators-legacy',
           [ 'react-transform', {

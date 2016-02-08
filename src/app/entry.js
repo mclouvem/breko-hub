@@ -1,12 +1,12 @@
 import ReactDOM from 'react-dom'
 import { Router } from 'react-router'
-import { getPrefetchedData, getDeferredData } from 'react-fetcher'
+import { after, flow } from 'lodash'
+import { trigger } from 'redial'
 import { makeContent } from 'app/utils/makeContent'
 import { history } from 'app/state/history'
 import { store } from 'app/state/store'
 import makeRoutes from 'app/makeRoutes'
 import DevTools from 'app/components/containers/DevTools'
-import debug from 'debug'
 import { socket } from 'app/state/socket'
 import { inClientViaSocketIO } from 'redux-via-socket.io'
 
@@ -29,11 +29,16 @@ socket.on('connect', () => {
   })
 })
 
-function onRouteUpdate() {
-  const { components, location, params } = this.state
-  getPrefetchedData(components, { store, location, params })
-  getDeferredData(components, { store, location, params })
-}
+const onRouteUpdate = flow(
+  after(2, function() {
+    const { components, location, params } = this.state
+    trigger('prefetch', components, { store, location, params })
+  }),
+  function() {
+    const { components, location, params } = this.state
+    trigger('defer', components, { store, location, params })
+  }
+)
 
 ReactDOM.render(
   makeContent(

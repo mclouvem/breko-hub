@@ -1,5 +1,4 @@
-import React, { PropTypes } from 'react'
-import { prefetch, defer } from 'react-fetcher'
+import { provideHooks } from 'redial'
 import { isBrowser } from 'app/utils/predicates'
 
 const fooFetchDataCreator = () => ({
@@ -16,8 +15,10 @@ const clietOnlyCreator = () => ({
   },
 })
 
-@prefetch(({ store }) => store.dispatch(fooFetchDataCreator()))
-@defer(({ store }) => store.dispatch(clietOnlyCreator()))
+@provideHooks({
+  prefetch: ({ store }) => store.dispatch(fooFetchDataCreator()),
+  defer: ({ store }) => store.dispatch(clietOnlyCreator()),
+})
 class FooRoute extends React.Component {
 
   static propTypes = {

@@ -1,10 +1,12 @@
+import '~/scripts/helpers/cssModulesHook'
 import path from 'path'
 import Mocha from 'mocha'
 import glob from 'glob'
 import { TESTS, ROOT } from 'config/paths'
+import { argv } from 'yargs'
 
 const mocha = new Mocha({
-  reporter: 'nyan',
+  reporter: argv.reporter || 'nyan',
   ui: 'bdd',
 })
 
